@@ -54,10 +54,10 @@ main {
   gap: 1rem;
 
   grid-template-areas:
-    "a  b  c  d"
-    "l ⭐ ⭐ e"
-    "k ⭐ ⭐ f"
-    "j  i  h  g";
+    "a b c d"
+    "l m m e"
+    "k m m f"
+    "j i h g";
 
   grid-template-rows: repeat(4, 25%);
   grid-template-columns: 240px auto auto 240px;
@@ -103,6 +103,6 @@ $images: '/images/github.svg',
 }
 
 .card:last-child {
-  grid-area: ⭐;
+  grid-area: m;
   background-image: url(/images/main.svg);
 }
