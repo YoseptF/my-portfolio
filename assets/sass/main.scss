@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans&display=swap");
+
+$primary: #111f51;
+$seconday: #19ceda;
+
 * {
   border: 0;
   margin: 0;
@@ -6,48 +10,63 @@
 }
 
 body {
-  background: #00acffab;
-  color: #fff;
+  background: #111f51e0;
   font-family: "Noto Sans", sans-serif;
+  color: $seconday;
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+  height: fit-content;
 }
 
 main {
   padding: 12px;
+  grid-column: span 12;
+  height: 90vh;
 }
 
-.card {
-  background: #fff;
-  font-size: 3rem;
-  color: #fff;
-  box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
-  height: 100%;
-  width: 100%;
-  border-radius: 4px;
+header {
+  height: 10vh;
+  min-height: 100px;
+  grid-column: span 12;
+  background: $primary;
   transition: all 500ms;
-  
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  
-  animation: cardEntrance 700ms ease-out;
-  animation-fill-mode: backwards;
-  
-  a{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-  }
 
-  &:hover {
-    box-shadow: #041d2969 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+  animation: dropDown 400ms ease-in-out;
+  animation-delay: 1.2s;
+  animation-fill-mode: backwards;
+  .glitch {
+    color: white;
+    font-size: 4.5rem;
+    position: relative;
+    width: 400px;
+    margin: 0 auto;
+    &:after {
+      content: attr(data-text);
+      position: absolute;
+      left: 2px;
+      text-shadow: -1px 0 red;
+      top: 0;
+      color: white;
+      background: $primary;
+      overflow: hidden;
+      animation: noise-anim 2s infinite linear alternate-reverse;
+    }
+    &:before {
+      content: attr(data-text);
+      position: absolute;
+      left: -2px;
+      text-shadow: 1px 0 blue;
+      top: 0;
+      color: white;
+      background: $primary;
+      overflow: hidden;
+      animation: noise-anim-2 15s infinite linear alternate-reverse;
+    }
   }
 }
 
 .animated-grid {
-  height: calc(100vh - 5rem);
+  height: calc(90vh - 3rem);
 
   display: grid;
   gap: 1rem;
@@ -58,82 +77,158 @@ main {
     "k m m f"
     "j i h g";
 
-  grid-template-rows: repeat(4, 25%);
+  grid-template-rows: repeat(4, 1fr);
   grid-template-columns: 240px auto auto 240px;
 
   --stagger-delay: 100ms;
 }
 
+@keyframes noise-anim {
+  $steps: 20;
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      $top: random(100);
+      $bottom: random(101 - $top);
+      clip-path: inset(#{$top}% 0 #{$bottom}% 0);
+    }
+  }
+}
+
+@keyframes noise-anim-2 {
+  $steps: 20;
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      $top: random(100);
+      $bottom: random(101 - $top);
+      clip-path: inset(#{$top}% 0 #{$bottom}% 0);
+    }
+  }
+}
+
+@keyframes dropDown {
+  from {
+    transform: translate(0, -100px);
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}
+
 @keyframes cardEntrance {
   from {
     opacity: 0;
-    transform: scale(0.3);
-    filter: hue-rotate(180deg);
   }
   to {
     opacity: 1;
-    transform: scale(1);
-    filter: hue-rotate(0deg);
   }
 }
 
 $areas: a, b, c, d, e, f, g, h, i, j, k, l;
-$images: '/images/github.svg',
-'/images/github.svg',
-'/images/lifestyle.png',
-'/images/github.svg',
-'/images/linkedin.png',
-'/images/twitter.png',
-'/images/github.svg',
-'/images/github.svg',
-'/images/github.svg',
-'/images/github.svg',
-'/images/github.svg',
-'/images/github.svg';
+$images: "/images/github.svg", "/images/github.svg", "/images/lifestyle.png", "/images/github.svg",
+  "/images/linkedin.png", "/images/twitter.png", "/images/github.svg", "/images/github.svg", "/images/github.svg",
+  "/images/github.svg", "/images/github.svg", "/images/github.svg";
 
 @each $area in $areas {
   $i: index($areas, $area);
   .card:nth-child(#{$i}) {
     grid-area: #{$area};
     animation-delay: calc(#{index($areas, $area)} * var(--stagger-delay));
-    background-image: url(#{nth($images, $i)});
-    background-size: contain;
+    .front {
+      background-image: url(#{nth($images, $i)});
+      background-size: contain;
+    }
+    .back {
+      background-image: url(#{nth($images, $i)});
+      background-size: contain;
+    }
   }
 }
 
-.card:last-child {
+.card:last-child .front {
+  background: url(/images/main.svg) no-repeat center / cover;
+}
+
+.card {
+  cursor: pointer;
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  transition: all 500ms;
+
+  animation: cardEntrance 700ms ease-out;
+  animation-fill-mode: backwards;
+
   grid-area: m;
   position: relative;
   background: none;
   box-shadow: none;
-  perspective: 600px;
-  .container{
-    position: relative;
+  perspective: 100vmax;
+  .front,
+  .back {
+    position: absolute;
+    transition: 0.5s;
     width: 100%;
     height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.2s ease;
-    .front{
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: url(/images/main.svg);
-      background-size: cover;
-      background-repeat: no-repeat;
-      backface-visibility: hidden;
-    }
-    .back{
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: red;
-      background-size: cover;
-      background-repeat: no-repeat;
-      backface-visibility: hidden;
-      transform: rotateX(180deg);
-    }
-    &:hover{
-      transform: rotateX(180deg);
+    backface-visibility: hidden;
+    padding: 24px;
+    display: flex;
+  }
+  .front {
+    background: white;
+    border-radius: 4px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .back {
+    background: white;
+    transform: rotateX(180deg);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  a {
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+  &:hover .front {
+    transform: rotateX(180deg) scale(0.5);
+  }
+  &:hover .back {
+    transform: rotateX(360deg) scale(1);
+  }
+}
+
+.back.main {
+  height: 100%;
+  align-items: center;
+  background: $primary;
+  .description,
+  img {
+    height: 50%;
+  }
+  img {
+    border-radius: 100%;
+  }
+  .description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px;
+    font-weight: bold;
+    p {
+      margin-bottom: 12px;
     }
   }
+}
+
+footer {
+  grid-column: span 12;
+  height: 10vh;
+  background: $seconday;
+  color: $primary;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,23 +1,101 @@
 {{ define "main" }}
 <section class="animated-grid">
-  <div class="card"><a href="javascript:void(0)" target="_blank">a</a></div>
-  <div class="card"><a href="javascript:void(0)" target="_blank">b</a></div>
-  <div class="card"><a href="https://aqueous-springs-55430.herokuapp.com/" target="_blank"></a></div>
-  <div class="card"><a href="https://github.com/YoseptF" target="_blank"></a></div>
-  <div class="card"><a href="https://www.linkedin.com/in/joseph-flores-vega/" target="_blank"></a></div>
-  <div class="card"><a href="https://twitter.com/Yosept__" target="_blank"></a></div>
-  <div class="card"><a href="javascript:void(0)" target="_blank">f</a></div>
-  <div class="card"><a href="javascript:void(0)" target="_blank">g</a></div>
-  <div class="card"><a href="javascript:void(0)" target="_blank">h</a></div>
-  <div class="card"><a href="javascript:void(0)" target="_blank">i</a></div>
-  <div class="card"><a href="javascript:void(0)" target="_blank">j</a></div>
-  <div class="card"><a href="javascript:void(0)" target="_blank">k</a></div>
   <div class="card">
-    <div class="container">
-      <div class="front">
-        <a href="javascript:void(0)"></a>
+    <div class="front">
+    </div>
+    <div class="back">
+      <a href="javascript:void(0)" target="_blank"></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="front">
+    </div>
+    <div class="back">
+      <a href="javascript:void(0)" target="_blank"></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="front">
+    </div>
+    <div class="back">
+      <a href="https://aqueous-springs-55430.herokuapp.com/" target="_blank"></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="front">
+    </div>
+    <div class="back">
+      <a href="https://github.com/YoseptF" target="_blank"></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="front">
+    </div>
+    <div class="back">
+      <a href="https://www.linkedin.com/in/joseph-flores-vega/" target="_blank"></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="front">
+    </div>
+    <div class="back">
+      <a href="https://twitter.com/Yosept__" target="_blank"></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="front">
+    </div>
+    <div class="back">
+      <a href="javascript:void(0)" target="_blank"></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="front">
+    </div>
+    <div class="back">
+      <a href="javascript:void(0)" target="_blank"></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="front">
+    </div>
+    <div class="back">
+      <a href="javascript:void(0)" target="_blank"></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="front">
+    </div>
+    <div class="back">
+      <a href="javascript:void(0)" target="_blank"></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="front">
+    </div>
+    <div class="back">
+      <a href="javascript:void(0)" target="_blank"></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="front">
+    </div>
+    <div class="back">
+      <a href="javascript:void(0)" target="_blank"></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="front">
+    </div>
+    <div class="back main">
+      {{ $profile := resources.Get "images/profile.jpeg" }}
+      {{ $profile := $profile.Fill "200x200"}}
+      <img src="{{ $profile.Permalink }}" alt="">
+      <div class="description">
+        <p>Remote Full-stack Developer (Ruby / Rails / Js / React)</p>
+        <p>I'm a full-stack developer, I've been working with JavaScript for over 8 years(P5.js, React.js, ML5), Unity with C# for about 4 years, and now focusing on Ruby and Golang.
+          My inbox is always open, I love creative projects, so hit me up with an email anytime. </p>
       </div>
-      <div class="back"></div>
     </div>
   </div>
 </section>
