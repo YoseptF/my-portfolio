@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans&display=swap");
+* {
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #00acffab;
+  color: #fff;
+  font-family: "Noto Sans", sans-serif;
+}
+
+main {
+  padding: 12px;
+}
+
+.card {
+  background: #fff;
+  font-size: 3rem;
+  color: #fff;
+  box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
+  height: 100%;
+  width: 100%;
+  border-radius: 4px;
+  transition: all 500ms;
+  overflow: hidden;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  animation: cardEntrance 700ms ease-out;
+  animation-fill-mode: backwards;
+  
+  a{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  &:hover {
+    box-shadow: #041d2969 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+  }
+}
+
+.animated-grid {
+  height: calc(100vh - 5rem);
+
+  display: grid;
+  gap: 1rem;
+
+  grid-template-areas:
+    "a  b  c  d"
+    "l ⭐ ⭐ e"
+    "k ⭐ ⭐ f"
+    "j  i  h  g";
+
+  grid-template-rows: repeat(4, 25%);
+  grid-template-columns: 240px auto auto 240px;
+
+  --stagger-delay: 100ms;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+    filter: hue-rotate(180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
+}
+
+$areas: a, b, c, d, e, f, g, h, i, j, k, l;
+$images: '/images/github.svg',
+'/images/github.svg',
+'/images/lifestyle.png',
+'/images/github.svg',
+'/images/linkedin.png',
+'/images/github.svg',
+'/images/github.svg',
+'/images/github.svg',
+'/images/github.svg',
+'/images/github.svg',
+'/images/github.svg',
+'/images/github.svg';
+
+@each $area in $areas {
+  $i: index($areas, $area);
+  .card:nth-child(#{$i}) {
+    grid-area: #{$area};
+    animation-delay: calc(#{index($areas, $area)} * var(--stagger-delay));
+    background-image: url(#{nth($images, $i)});
+    background-size: contain;
+  }
+}
+
+.card:last-child {
+  grid-area: ⭐;
+  background-image: url(/images/main.svg);
+}

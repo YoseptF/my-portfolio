@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  {{ $style := resources.Get "sass/main.scss" | toCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $style.Permalink }}">
+  <title>
+    {{ block "title" . }}
+    {{ .Site.Title }}
+    {{ end }}
+  </title>
+</head>
+
+<body>
+  {{ partial "shared/header.html" . }}
+  <!-- Code that all your templates share, like a header -->
+  <main>
+    {{ block "main" . }}
+    <!-- The part of the page that begins to differ between templates -->
+    {{ end }}
+  </main>
+  {{ partial "shared/footer.html" . }}
+</body>
+
+</html>
