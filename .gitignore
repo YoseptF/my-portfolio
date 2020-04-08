@@ -5,7 +5,7 @@
 # Generated files by hugo
 /public/
 /resources/_gen/
-/static/js/**
+/assets/js/bundle.js
 
 # Executable may be added to repository
 hugo.exe
